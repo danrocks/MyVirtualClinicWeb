@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var db = Database.Open("MyVirtualClinicDb");
+    var sql = "select * from mvc_person";
+}
+
+<div class="jumbotron">
+    <h1>MyVirtualClinic</h1>
+    <p class="lead">Better Technology: Better Service: Better for Patients</p>
+    @*<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Patients</h2>
+        <p>
+            <ul>
+                <li>Arrange appointments to fit your priorities</li>
+                <li>Get access to resources to help you manage your condition</li>
+                <li>Give your doctors the knowledge they need about you</li>
+            </ul>
+        </p>
+        @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>*@
+    </div>
+    <div class="col-md-4">
+        <h2>General Practitioners</h2>
+        <p>
+            <ul>
+                <li>Improve record-keeping</li>
+                <li>Give secondary care better information</li>
+                <li>Get better feedback from secondary care</li>
+            </ul>
+
+        </p>
+        @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>*@
+    </div>
+    <div class="col-md-4">
+        <h2>Consultants</h2>
+        <p>
+            <ul>
+                <li>Do consultations virtually</li>
+                <li>Get better information from patients and colleagues</li>
+                <li>Give knowledge and empower other healthcare providers</li>
+            </ul>
+        </p>
+        @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>*@
+    </div>
+    @*<table>
+        <thead>
+            <tr>
+                <th>Person</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in db.Query(sql))
+            {
+                <tr>
+                    <td>@row.Person</td>
+                    <td>@row.FirstName</td>
+                    <td>@row.LastName</td>
+                    <td>@row.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+</div>

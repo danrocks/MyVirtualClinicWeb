@@ -1,0 +1,111 @@
+﻿@model MyVirtualClinicWeb.Models.VirtualClinicSubmissionModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <div class="col-md-6 ">
+    <h4>Patient Images</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmissionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubmissionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Upload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Upload)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.PersonId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuditWhen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuditWhen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUserId)
+        </dt>        
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUserId)
+        </dd>
+
+
+
+        @if (Model.PersonModel.Count == 1)
+        {
+            foreach (MyVirtualClinicWeb.Models.PersonModel personModel in Model.PersonModel)
+            {
+                <dt>
+                    Firstname
+                </dt>
+                <dd>
+                    @personModel.Firstname
+                </dd>
+                <dt>
+                    Surname
+                </dt>
+                <dd>
+                    @personModel.Surname
+                </dd>
+                <dt>
+                    Date of Birth
+                </dt>
+                <dd>
+                    @personModel.Dob.ToString("dd/MM/yyyy");
+                </dd>
+            }
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageModels)
+        </dt>
+
+        <dd>
+            @foreach(var imageModel in Model.ImageModels )
+            { 
+                <img alt="Embedded Image from base64"
+                     style="padding:5px"
+                     @GetOrientation(imageModel)
+                      />
+            }
+        </dd>
+    </dl>
+    </div>
+</div>
+@helper GetOrientation(MyVirtualClinicWeb.Models.ImageModel imageModel) {
+if (!string.IsNullOrEmpty(imageModel.Image)) {
+    using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(imageModel.Image)))
+    {
+        using (System.Drawing.Image bm2 = new System.Drawing.Bitmap(ms))
+        {
+            if (bm2.PropertyIdList.Contains(274)) { 
+            var x = (int)bm2.GetPropertyItem(274).Value[0];
+            if (x==6) {
+                <text> class="rotate90" </text>
+                }
+            }
+
+        }
+    <text>src="data:image/jpeg;base64, @imageModel.Image"</text>
+    }
+}
+}
